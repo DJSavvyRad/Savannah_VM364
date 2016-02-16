@@ -2,7 +2,7 @@
 
 function OnGUI() {
 
-	if (GUI.Button(Rect(10,70,50,30),"Start")){
+	if (GUI.Button(Rect(Screen.width / 2,Screen.height / 2,60,30),"Start")){
 	    BeginGame();
 	}
 }
@@ -20,6 +20,6 @@ function Update () {
 }
 
 function BeginGame(){
-   Application.LoadLevel("Level1");
+   Application.LoadLevel("01_PointShoot");
    // You can change "Level 1" to 1
 }

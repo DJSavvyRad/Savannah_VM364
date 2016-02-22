@@ -3,10 +3,76 @@ guid: cc456853c4eea43b39380ef7a0399ff5
 timeCreated: 1455663837
 licenseType: Pro
 ModelImporter:
-  serializedVersion: 18
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: BackPost1
+    100004: BackPost2
+    100006: BackPosts
+    100008: Fencepost1
+    100010: Fencepost2
+    100012: Fencepost3
+    100014: Fencepost4
+    100016: Fencepost5
+    100018: Fencepost6
+    100020: Fencepost7
+    100022: Fencepost8
+    100024: Fencepost9
+    100026: Fenceposts
+    100028: group1
+    100030: StabbyPost
     400000: //RootNode
+    400002: BackPost1
+    400004: BackPost2
+    400006: BackPosts
+    400008: Fencepost1
+    400010: Fencepost2
+    400012: Fencepost3
+    400014: Fencepost4
+    400016: Fencepost5
+    400018: Fencepost6
+    400020: Fencepost7
+    400022: Fencepost8
+    400024: Fencepost9
+    400026: Fenceposts
+    400028: group1
+    400030: StabbyPost
+    2300000: BackPost1
+    2300002: BackPost2
+    2300004: Fencepost1
+    2300006: Fencepost2
+    2300008: Fencepost3
+    2300010: Fencepost4
+    2300012: Fencepost5
+    2300014: Fencepost6
+    2300016: Fencepost7
+    2300018: Fencepost8
+    2300020: Fencepost9
+    2300022: StabbyPost
+    3300000: BackPost1
+    3300002: BackPost2
+    3300004: Fencepost1
+    3300006: Fencepost2
+    3300008: Fencepost3
+    3300010: Fencepost4
+    3300012: Fencepost5
+    3300014: Fencepost6
+    3300016: Fencepost7
+    3300018: Fencepost8
+    3300020: Fencepost9
+    3300022: StabbyPost
+    4300000: Fencepost1
+    4300002: Fencepost2
+    4300004: Fencepost3
+    4300006: Fencepost4
+    4300008: Fencepost5
+    4300010: Fencepost6
+    4300012: Fencepost7
+    4300014: Fencepost8
+    4300016: Fencepost9
+    4300018: BackPost2
+    4300020: BackPost1
+    4300022: StabbyPost
   materials:
     importMaterials: 1
     materialName: 0
@@ -14,6 +80,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    resampleRotations: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -21,16 +88,16 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.0125
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -47,24 +114,25 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
+    tangentImportMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
-    armTwist: .5
-    foreArmTwist: .5
-    upperLegTwist: .5
-    legTwist: .5
-    armStretch: .0500000007
-    legStretch: .0500000007
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

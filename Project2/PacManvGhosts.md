@@ -55,3 +55,9 @@ We got rid of two of the boards that allowed the ghosts to teleport to the other
 
 ![2boards](2boards.jpg)
 
+
+Our final board ended up looking like this:
+
+![Digital_Board_04](Digital_Board_04.png)
+
+We also added four final fruits to spawn randomly with the roll of a four-sided die after PacMan eats a fruit to make sure that PacMan doesn’t camp around one of the corners.

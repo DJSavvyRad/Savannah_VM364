@@ -50,7 +50,7 @@ function Update() {
     if (chase == false) {
        if (agent.remainingDistance <= dist)
         GotoNextPoint();
-        Debug.Log(this.gameObject.name + " Distance Remaining to point " + destPoint + ": " + agent.remainingDistance);
+//        Debug.Log(this.gameObject.name + " Distance Remaining to point " + destPoint + ": " + agent.remainingDistance);
 	} else {
 		agent.destination = Player.transform.position;
 	}

@@ -4,6 +4,8 @@ static var myGlobals : GameObject;
 static var keyCollector : Key_Collector;
 static var distanceToKey : float = 25; // maximum distance that the raycast will detect
 
+var keySprite : GameObject;
+
 var safeHouseStatus : boolean;
 var thisKey : GameObject;
 var halo : Behaviour;
@@ -12,7 +14,7 @@ function Awake () {
 	myGlobals = GameObject.FindWithTag("System");
 	keyCollector = myGlobals.GetComponent("Key_Collector");
 	halo.enabled = false; 
-}
+	}
 
 function Update () {
 	safeHouseStatus = keyCollector.foundSafeHouse;
@@ -38,7 +40,10 @@ if ( Input.GetMouseButtonDown(0) || Input.GetKeyDown( KeyCode.E ) ) {
 			if ( hit.collider.gameObject.name == thisKey.name  ) {
 //				Debug.Log( "Ray hit key for sure" );
 				keyCollector.keyPiece += 1;
-				Destroy( hit.collider.gameObject );
+				keySprite.SetActive(true);
+//				Destroy( hit.collider.gameObject );
+				hit.collider.gameObject.SetActive(false);
+
 			}
 		}
 	}

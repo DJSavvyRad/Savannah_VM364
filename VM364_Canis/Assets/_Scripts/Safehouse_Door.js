@@ -22,12 +22,12 @@ function OnTriggerEnter(){
 }
 
 function openDoor(){
-	print("Open Door");
+	Debug.Log("Open Door");
 	//Play door open animation
 }
 
 function locked(){
-	print("Door is Locked");
+	Debug.Log("Door is Locked");
 	//Play door locked animation
 	//Play "shit its locked sound"
 	//Activate mini-map

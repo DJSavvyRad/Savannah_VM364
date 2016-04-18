@@ -1,11 +1,11 @@
 #pragma strict
-static var keyPiece : int = 0;
-static var haveKey : boolean = false;
 
+var keyPiece : int = 0;
+var haveKey : boolean = false;
+var foundSafeHouse : boolean = false;
 
-function openDoor() {
-	if (haveKey == true) {
-		//Door Opens
+function Update() {
+	if (keyPiece >= 3){
+		haveKey = true;
 		}
 }
-

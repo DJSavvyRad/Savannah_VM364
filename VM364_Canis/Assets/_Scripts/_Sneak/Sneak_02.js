@@ -1,20 +1,18 @@
 ﻿#pragma strict
 
-var Player : GameObject;
+static var Player : GameObject;
+static var myGlobals : GameObject;
 
-var creatureRange : CapsuleCollider;
-var csScript : UnityStandardAssets.Characters.FirstPerson.FirstPersonController;  
-var patrolScript : AutoPatrol;
-
-var chase : boolean;
+static var creatureRange : CapsuleCollider;
+static var csScript : UnityStandardAssets.Characters.FirstPerson.FirstPersonController;  
+static var patrolScript : AutoPatrol_02;
+static var chase : boolean;
 
 function Awake()  {  
 		Player = GameObject.FindWithTag("Player");
 		csScript = Player.GetComponent("FirstPersonController") as UnityStandardAssets.Characters.FirstPerson.FirstPersonController;
 		creatureRange = GetComponent.<CapsuleCollider>();
-
-		patrolScript = GetComponent.<AutoPatrol>();
-
+		patrolScript = GetComponent("AutoPatrol_02");
 		chase = patrolScript.chase;
 }  
 

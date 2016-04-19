@@ -119,7 +119,6 @@ function changeSpeed(){
 	Debug.Log("speed: " + agent.speed);
 	Debug.Log("distance: " + dist);
 	Debug.Log("ratio: " + distRatio);
-
 }
 
 

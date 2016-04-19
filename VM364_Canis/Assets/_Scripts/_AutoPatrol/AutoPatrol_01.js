@@ -1,13 +1,12 @@
 ﻿#pragma strict
 var pointGroup : GameObject;
-@HideInInspector
-public var points : GameObject[] = new GameObject[pointGroup.transform.childCount];
-static var i : int = 0;
+var arraySize : int;
+//@HideInInspector
+public var points : GameObject[];
+//static var i : int = 0;
+@Range(0,10)
+var offsetStart : int;
 
-//var points : Transform[] = new Transform[5];
-
-// Patrol.js
-//var points: Transform[];
 static var destPoint: int = 0;
 static var agent: NavMeshAgent;
 static var Player : GameObject;
@@ -15,16 +14,22 @@ var chase : boolean;
 @Range(0,25)
 var dist : float = 15;
 
-function Start() {
-    agent = this.GetComponent.<NavMeshAgent>();
-    Player = GameObject.FindWithTag("Player");
-    for(var child : Transform in pointGroup.transform){
+function Awake() {
+	var i : int = 0;
+//	@HideInInspector
+	arraySize = pointGroup.transform.childCount;
+	points = new GameObject[arraySize]; // pointGroup.transform.childCount
+	for(var child : Transform in pointGroup.transform){
 		points[i] = child.gameObject;
 		i++;
 		}
-    // Disabling auto-braking allows for continuous movement
-    // between points (ie, the agent doesn't slow down as it
-    // approaches a destination point).
+	Start();
+}
+
+function Start() {
+    agent = this.GetComponent.<NavMeshAgent>();
+    Player = GameObject.FindWithTag("Player");
+    destPoint = destPoint + offsetStart;
     agent.autoBraking = false;
     chase = false;
     GotoNextPoint();
@@ -36,6 +41,7 @@ function OnTriggerStay(){
 
 function OnTriggerExit(){
 	chase = false;
+	destPoint = returnPatrol();
 	GotoNextPoint();
 }
 
@@ -63,4 +69,23 @@ function Update() {
 	} else {
 		agent.destination = Player.transform.position;
 	}
+}
+
+function returnPatrol():int {
+// Find all game objects with tag Enemy
+		var r : int = 0;
+		var closest : int; 
+		var distance = Mathf.Infinity; 
+		var position = transform.position; 
+		// Iterate through them and find the closest one
+		for (var go : GameObject in points)  { 
+			var diff = (go.transform.position - position);
+			var curDistance = diff.sqrMagnitude; 
+			if (curDistance < distance) { 
+				closest = r; 
+				distance = curDistance; 
+				r++;
+			} 
+		} 
+		return closest;	
 }

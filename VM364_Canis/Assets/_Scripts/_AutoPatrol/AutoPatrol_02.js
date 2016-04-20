@@ -1,7 +1,7 @@
 ﻿#pragma strict
 var pointGroup : GameObject;
 public var arraySize : int;
-//@HideInInspector
+@HideInInspector
 public var points : GameObject[];
 //static var i : int = 0;
 @Range(0,10)
@@ -14,7 +14,18 @@ static var agent: NavMeshAgent;
 static var Player : GameObject;
 var chase : boolean;
 @Range(0,25)
-var dist : float = 15;
+var patrolDist : float = 15;
+
+var minSpeed : float;
+//var maxSpeed : float;
+//var maxDist : float;
+//var minDist : float;
+@Range(0,5)
+var delay : float=2;
+static var curTime : float =0;
+
+var fastChase : boolean;
+
 
 function Awake(){
 	var i : int = 0;
@@ -30,10 +41,11 @@ function Awake(){
 function Start() {
     agent = this.GetComponent.<NavMeshAgent>();
     Player = GameObject.FindWithTag("Player");
-    destPoint = destPoint + offsetStart;
+    destPoint = offsetStart;
     agent.autoBraking = false;
     chase = false;
     GotoNextPoint();
+    agent.speed = minSpeed;
 }
 
 function OnTriggerStay(){
@@ -44,6 +56,8 @@ function OnTriggerExit(){
 	chase = false;
 	destPoint = returnPatrol();
 	GotoNextPoint();
+	fastChase=false;
+	curTime=0;
 }
 
 function GotoNextPoint() {
@@ -63,12 +77,17 @@ function GotoNextPoint() {
 function Update() {
     // Choose the next destination point when the agent gets
     // close to the current one.
+    stopWatch();
     if (chase == false) {
-       if (agent.remainingDistance <= dist)
+    	agent.speed = 30;
+       if (agent.remainingDistance <= patrolDist)
         GotoNextPoint();
 //        Debug.Log(this.gameObject.name + " Distance Remaining to point " + destPoint + ": " + agent.remainingDistance);
 	} else {
-		changeSpeed();
+		if (fastChase == false){
+			agent.speed=minSpeed;
+			}
+		speedUp();
 		agent.destination = Player.transform.position;
 	}
 }
@@ -92,33 +111,16 @@ function returnPatrol():int {
 		return closest;	
 }
 
-//function changeSpeed(){
-//	var distance = Vector3.Distance(transform.position, Player.transform.position);
-////	Debug.Log(distance);
-//	distance = Mathf.Abs(1-distance*.005);
-//	agent.speed = chaseSpeed * (.4+distance*.7);
-////	Debug.Log(distance);
-//}
-
-var minSpeed : float;
-var maxSpeed : float;
-var maxDist : float;
-var minDist : float;
-
-function changeSpeed(){
+function speedUp(){
 	var dist = Vector3.Distance(transform.position, Player.transform.position);
-	if (dist > maxDist){
-		agent.speed = minSpeed;
-	} else if (dist < minDist) {
-		agent.speed = maxSpeed;
-	} else {
-		var distRatio = (dist - minDist)/(maxDist - minDist)+.2;
-		var diffSpeed = maxSpeed-minSpeed;
-		agent.speed = (distRatio) + minSpeed;
-	}
-	Debug.Log("speed: " + agent.speed);
-	Debug.Log("distance: " + dist);
-	Debug.Log("ratio: " + distRatio);
+	if (curTime > delay){
+		fastChase = true;
+		agent.speed = agent.speed+.5;
+		}
 }
 
-
+function stopWatch(){
+	if (chase == true){
+		curTime += 1*Time.deltaTime;
+		}
+	}

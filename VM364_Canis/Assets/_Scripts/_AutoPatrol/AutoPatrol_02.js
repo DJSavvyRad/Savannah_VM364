@@ -1,126 +1,152 @@
 ﻿#pragma strict
+
+//Inspector Variables
+@Space (15)
 var pointGroup : GameObject;
-public var arraySize : int;
-@HideInInspector
-public var points : GameObject[];
-//static var i : int = 0;
+
+	//Audio
+	@Header ("Audio Clips")
+	var creatureSFX_Find : AudioClip;
+	var creatureSFX_Chase : AudioClip;
+	var creatureSFX_Idle : AudioClip;
+	var creatureSFX_GiveUp : AudioClip;
+
+@Space (15)
+
 @Range(0,10)
 var offsetStart : int;
-@Range(20,75)
-var chaseSpeed : float = 35;
-
-static var destPoint: int = 0;
-static var agent: NavMeshAgent;
-static var Player : GameObject;
-var chase : boolean;
-@Range(0,25)
-var patrolDist : float = 15;
-
+@Range(10,50)
 var minSpeed : float;
-//var maxSpeed : float;
-//var maxDist : float;
-//var minDist : float;
+@Range(10,50)
+var defaultSpeed : float = 30;
 @Range(0,5)
-var delay : float=2;
-static var curTime : float =0;
+var chaseDelay : float;
 
-var fastChase : boolean;
+//Script Variables
+@HideInInspector
+public var points : GameObject[];
+static var Player : GameObject;
+
+static var agent: NavMeshAgent;
+
+@HideInInspector
+public var arraySize : int;
+static var patrolDist : float = 15;
+static var destPoint: int = 0;
+static var curTime : float;
+static var fastChase : boolean;
+static var chase : boolean;
 
 
 function Awake(){
 	var i : int = 0;
+
 	arraySize = pointGroup.transform.childCount;
-	points = new GameObject[arraySize]; // pointGroup.transform.childCount
+
+	points = new GameObject[arraySize];
+
 	for(var child : Transform in pointGroup.transform){
 		points[i] = child.gameObject;
 		i++;
 		}
-	Start();
+	
+	Start(); // Recall start function when scene restarts
 }
 
 function Start() {
     agent = this.GetComponent.<NavMeshAgent>();
     Player = GameObject.FindWithTag("Player");
-    destPoint = offsetStart;
-    agent.autoBraking = false;
+
+    destPoint = offsetStart % points.Length;
     chase = false;
-    GotoNextPoint();
+    fastChase = false;
     agent.speed = minSpeed;
+    curTime = 0;
+    GotoNextPoint();
 }
 
 function OnTriggerStay(){
 	chase = true;
+	//audio.PlayOneShot(creatureSFX_Find);
 }
 
 function OnTriggerExit(){
 	chase = false;
 	destPoint = returnPatrol();
-	GotoNextPoint();
 	fastChase=false;
-	curTime=0;
-}
 
-function GotoNextPoint() {
-    // Returns if no points have been set up
-    if (points.Length == 0)
-        return;
-        
-    // Set the agent to go to the currently selected destination.
-    agent.destination = points[destPoint].transform.position;
-//    Debug.Log("I am - " + this.gameObject.name + " Moving to point: " + destPoint);
-    // Choose the next point in the array as the destination,
-    // cycling to the start if necessary.
-    destPoint = (destPoint + 1) % points.Length;
+	curTime=0; //reset delay timer
+	GotoNextPoint();
+	//audio.PlayOneShot(creatureSFX_GiveUp);
 }
-
 
 function Update() {
-    // Choose the next destination point when the agent gets
-    // close to the current one.
-    stopWatch();
+    stopWatch(); //Only Runs stopwatch when chasing, but setup here to keep separate
+
+    //audio.Play(creatureSFX_Idle);
+
     if (chase == false) {
-    	agent.speed = 30;
-       if (agent.remainingDistance <= patrolDist)
-        GotoNextPoint();
-//        Debug.Log(this.gameObject.name + " Distance Remaining to point " + destPoint + ": " + agent.remainingDistance);
+		if (agent.remainingDistance <= patrolDist)
+			GotoNextPoint();
 	} else {
-		if (fastChase == false){
+		//audio.PlayOneShot(creatureSFX_Chase);
+		if (fastChase == false)
 			agent.speed=minSpeed;
-			}
+
 		speedUp();
 		agent.destination = Player.transform.position;
 	}
+//	myDebugs();
+}
+
+function GotoNextPoint() {
+	//Moves to the next control point in array, loops as necessary
+	agent.speed = defaultSpeed;
+    if (points.Length == 0)
+        return;     
+
+    agent.destination = points[destPoint].transform.position;
+    destPoint = (destPoint + 1) % points.Length;
 }
 
 function returnPatrol():int {
-// Find all game objects with tag Enemy
-		var r : int = 0;
-		var closest : int; 
-		var distance = Mathf.Infinity; 
-		var position = transform.position; 
-		// Iterate through them and find the closest one
-		for (var go : GameObject in points)  { 
-			var diff = (go.transform.position - position);
-			var curDistance = diff.sqrMagnitude; 
-			if (curDistance < distance) { 
-				closest = r; 
-				distance = curDistance; 
-				r++;
+	//Finds the closest Patrol Point, and returns it's index
+	var r : int = 0;
+	var closest : int; 
+	var distance = Mathf.Infinity; 
+	var position = transform.position; 
+
+	for (var go : GameObject in points)  { 
+		var diff = (go.transform.position - position);
+		var curDistance = diff.sqrMagnitude; 
+		if (curDistance < distance) { 
+			closest = r; 
+			distance = curDistance; 
+			r++;
 			} 
 		} 
-		return closest;	
+	return closest;	
 }
 
 function speedUp(){
-	var dist = Vector3.Distance(transform.position, Player.transform.position);
-	if (curTime > delay){
+	//When chasing, speed up the creature after a brief delay
+	if (curTime > chaseDelay){
 		fastChase = true;
 		agent.speed = agent.speed+.5;
 		}
 }
 
 function stopWatch(){
+	//When chasing, record duration
 	if (chase == true){
 		curTime += 1*Time.deltaTime;
 		}
-	}
+}
+
+function myDebugs(){
+	Debug.Log(agent.speed); //print the current speed
+//	Debug.Log("Time Since Load: " + Time.timeSinceLevelLoad);
+//	Debug.Log("Cur time: " + curTime);
+}
+
+InvokeRepeating("myDebugs", 1, .5);

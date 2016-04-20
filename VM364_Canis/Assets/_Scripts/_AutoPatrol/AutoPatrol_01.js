@@ -20,7 +20,7 @@ var minSpeed : float;
 @Range(10,50)
 var defaultSpeed : float = 30;
 @Range(0,5)
-var delay : float=2;
+var chaseDelay : float;
 
 //Script Variables
 @HideInInspector
@@ -33,7 +33,7 @@ static var agent: NavMeshAgent;
 public var arraySize : int;
 static var patrolDist : float = 15;
 static var destPoint: int = 0;
-static var curTime : float =0;
+static var curTime : float;
 static var fastChase : boolean;
 static var chase : boolean;
 
@@ -59,8 +59,9 @@ function Start() {
 
     destPoint = offsetStart % points.Length;
     chase = false;
+    fastChase = false;
     agent.speed = minSpeed;
-
+    curTime = 0;
     GotoNextPoint();
 }
 
@@ -95,7 +96,7 @@ function Update() {
 		speedUp();
 		agent.destination = Player.transform.position;
 	}
-	myDebugs();
+//	myDebugs();
 }
 
 function GotoNextPoint() {
@@ -129,7 +130,7 @@ function returnPatrol():int {
 
 function speedUp(){
 	//When chasing, speed up the creature after a brief delay
-	if (curTime > delay){
+	if (curTime > chaseDelay){
 		fastChase = true;
 		agent.speed = agent.speed+.5;
 		}
@@ -143,5 +144,9 @@ function stopWatch(){
 }
 
 function myDebugs(){
-//	Debug.Log(agent.speed); //print the current speed
+	Debug.Log(agent.speed); //print the current speed
+//	Debug.Log("Time Since Load: " + Time.timeSinceLevelLoad);
+//	Debug.Log("Cur time: " + curTime);
 }
+
+InvokeRepeating("myDebugs", 1, .5);

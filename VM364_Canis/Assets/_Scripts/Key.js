@@ -43,7 +43,6 @@ if ( Input.GetMouseButtonDown(0) || Input.GetKeyDown( KeyCode.E ) ) {
 				keySprite.SetActive(true);
 //				Destroy( hit.collider.gameObject );
 				hit.collider.gameObject.SetActive(false);
-
 			}
 		}
 	}

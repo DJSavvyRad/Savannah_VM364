@@ -149,4 +149,4 @@ function myDebugs(){
 //	Debug.Log("Cur time: " + curTime);
 }
 
-InvokeRepeating("myDebugs", 1, .5);
+//InvokeRepeating("myDebugs", 1, .5);

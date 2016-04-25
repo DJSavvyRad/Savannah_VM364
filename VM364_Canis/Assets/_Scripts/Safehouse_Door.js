@@ -4,10 +4,12 @@ static var myGlobals : GameObject;
 static var Key_Collector : Key_Collector;
 var doorFrame : GameObject;
 var animator: Animator;
+static var win : boolean;
 
 function Awake() {
 	myGlobals = GameObject.FindWithTag("System");
 	Key_Collector = myGlobals.GetComponent("Key_Collector");
+	win  = false;
 }
 
 function Update() {
@@ -31,7 +33,7 @@ function OnTriggerStay(){
 function openDoor(){
 	Debug.Log("Open Door");
 	animator.SetBool("Open",true);
-	//Play door open animation
+	win = true;
 }
 
 function locked(){

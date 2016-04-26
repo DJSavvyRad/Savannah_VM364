@@ -7,7 +7,7 @@ static var win : boolean;
 static var highScore : float = Mathf.Infinity;
 
 var style : GUISkin;
-var oneTime : boolean;
+static var oneTime : boolean;
 
 
 function Awake() {
@@ -15,7 +15,7 @@ function Awake() {
 	Safehouse_Door = myGlobals.GetComponent("Safehouse_Door");
 }
 
-function Update() {
+function OnTriggerStay() {
 	win = Safehouse_Door.win;
 	if (win == true) {
 		if (!oneTime){
@@ -25,6 +25,9 @@ function Update() {
 			oneTime=true;
 			}
 		}
+}
+
+function Update() {
 	stopWatch();
 }
 

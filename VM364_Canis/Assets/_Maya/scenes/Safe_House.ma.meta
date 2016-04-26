@@ -1,40 +1,46 @@
 fileFormatVersion: 2
-guid: d1f610b2a91914ed782ba62102c35918
-timeCreated: 1461018440
-licenseType: Free
+guid: 8fb6be40275684eaaa7cf673d012d95e
+timeCreated: 1461689691
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: door
     100002: DoorFrame
-    100004: Keyhole
-    100006: knob
-    100008: //RootNode
-    100010: inside
+    100004: inside
+    100006: Keyhole
+    100008: knob
+    100010: //RootNode
     400000: door
     400002: DoorFrame
-    400004: Keyhole
-    400006: knob
-    400008: //RootNode
-    400010: inside
+    400004: inside
+    400006: Keyhole
+    400008: knob
+    400010: //RootNode
     2300000: door
     2300002: DoorFrame
-    2300004: Keyhole
-    2300006: knob
-    2300008: //RootNode
-    2300010: inside
+    2300004: inside
+    2300006: Keyhole
+    2300008: knob
+    2300010: //RootNode
     3300000: door
     3300002: DoorFrame
-    3300004: Keyhole
-    3300006: knob
-    3300008: //RootNode
-    3300010: inside
+    3300004: inside
+    3300006: Keyhole
+    3300008: knob
+    3300010: //RootNode
     4300000: House
     4300002: DoorFrame
     4300004: door
     4300006: Keyhole
     4300008: knob
     4300010: inside
+    6400000: door
+    6400002: DoorFrame
+    6400004: inside
+    6400006: Keyhole
+    6400008: knob
+    6400010: //RootNode
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -62,7 +68,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 2
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

@@ -5,7 +5,10 @@ static var Key_Collector : Key_Collector;
 var doorFrame : GameObject;
 var animator: Animator;
 var win : boolean;
+var doorOpen : boolean;
 
+var lockedSound : AudioClip;
+var unlockedSound : AudioClip;
 
 //Win Variables
 static var curTime : float;
@@ -23,6 +26,7 @@ function Awake() {
 function Start() {
 	win = false;
 	oneTime=false;
+	doorOpen=false;
 
 }
 
@@ -44,6 +48,14 @@ function OnTriggerStay(col : Collider){
 				}
 			}
 		}
+//
+//	if(col.gameObject.tag == "Player"){	
+//		if ( Input.GetMouseButtonDown(0) || Input.GetKeyDown( KeyCode.E ) ) {
+//			if (doorOpen == true) {		
+//				closeDoor();
+//				}
+//		}
+//	}
 }
 
 function openDoor(){
@@ -56,14 +68,16 @@ function openDoor(){
 			}
 		oneTime=true;
 		}
+	doorOpen = true;
+	GetComponent.<AudioSource>().PlayOneShot(unlockedSound);
 }
 
 function locked(){
 	Debug.Log("Door is Locked");
 	animator.SetBool("Locked",true);
-	//Play door locked animation
-	//Play "shit its locked sound"
-	//Activate mini-map
+	yield WaitForSeconds(.35);
+	GetComponent.<AudioSource>().PlayOneShot(lockedSound);
+
 }
 
 function stopWatch(){
@@ -85,3 +99,8 @@ function OnGUI(){
    			}
 		}
 }
+
+//function closeDoor(){
+//	Debug.Log("Close Door");
+//	animator.SetBool("Close",true);
+//}

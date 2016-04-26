@@ -67,7 +67,7 @@ function Start() {
 
 function OnTriggerStay(){
 	chase = true;
-	//audio.PlayOneShot(creatureSFX_Find);
+//	GetComponent.<AudioSource>().PlayOneShot(creatureSFX_Find);
 }
 
 function OnTriggerExit(){
@@ -77,19 +77,19 @@ function OnTriggerExit(){
 
 	curTime=0; //reset delay timer
 	GotoNextPoint();
-	//audio.PlayOneShot(creatureSFX_GiveUp);
+//	GetComponent.<AudioSource>().PlayOneShot(creatureSFX_GiveUp);
 }
 
 function Update() {
     stopWatch(); //Only Runs stopwatch when chasing, but setup here to keep separate
 
-    //audio.Play(creatureSFX_Idle);
+//    GetComponent.<AudioSource>().Play(creatureSFX_Idle);
 
     if (chase == false) {
 		if (agent.remainingDistance <= patrolDist)
 			GotoNextPoint();
 	} else {
-		//audio.PlayOneShot(creatureSFX_Chase);
+//		GetComponent.<AudioSource>().PlayOneShot(creatureSFX_Chase);
 		if (fastChase == false)
 			agent.speed=minSpeed;
 

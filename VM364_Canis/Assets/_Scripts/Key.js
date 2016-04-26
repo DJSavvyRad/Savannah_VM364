@@ -6,6 +6,8 @@ static var myGlobals : GameObject;
 static var keyCollector : Key_Collector;
 static var distanceToKey : float = 25; // maximum distance that the raycast will detect
 
+var keySound : AudioClip;
+
 var keySprite : GameObject;
 var keyVisible : boolean = false;
 
@@ -44,8 +46,10 @@ if ( Input.GetMouseButtonDown(0) || Input.GetKeyDown( KeyCode.E ) ) {
 //			Debug.DrawLine( Camera.main.transform.position, hit.point, Color.red, 1.5 );
 			if ( hit.collider.gameObject.name == thisKey.name  ) {
 //				Debug.Log( "Ray hit key for sure" );
+				GetComponent.<AudioSource>().PlayOneShot(keySound);
 				keyCollector.keyPiece += 1;
 				keySprite.SetActive(true);
+				yield WaitForSeconds(.3);
 				Destroy( hit.collider.gameObject );
 //				hit.collider.gameObject.SetActive(false);
 			}

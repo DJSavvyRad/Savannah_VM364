@@ -10,26 +10,31 @@ ModelImporter:
     100004: Keyhole
     100006: knob
     100008: //RootNode
+    100010: inside
     400000: door
     400002: DoorFrame
     400004: Keyhole
     400006: knob
     400008: //RootNode
+    400010: inside
     2300000: door
     2300002: DoorFrame
     2300004: Keyhole
     2300006: knob
     2300008: //RootNode
+    2300010: inside
     3300000: door
     3300002: DoorFrame
     3300004: Keyhole
     3300006: knob
     3300008: //RootNode
+    3300010: inside
     4300000: House
     4300002: DoorFrame
     4300004: door
     4300006: Keyhole
     4300008: knob
+    4300010: inside
     9500000: //RootNode
   materials:
     importMaterials: 1
